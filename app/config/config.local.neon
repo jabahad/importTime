@@ -1,0 +1,9 @@
+parameters:
+
+
+database:
+	dsn: 'mysql:host=127.0.0.1;dbname=sam'
+	user: root
+	password: Standa_8888
+	options:
+		lazy: yes

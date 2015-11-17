@@ -1,0 +1,53 @@
+{block content}
+    <h1 n:block="title">Výsledky</h1>
+
+{*    {$swimmers}  *}
+
+    <table>
+        {if count($status["recnum"]) > 0}
+            <tr>
+                <td>errnum</td>
+                <td>recnum</td>
+            </tr>
+            <tr>
+                <td>{$status["errnum"]}</td>
+                <td>{$status["recnum"]}</td>
+            </tr>
+
+            <tr>
+                <td>-------------</td>
+                <td>-------------</td>
+            </tr>
+
+            <tr>
+                <td>ID závodu</td>
+                <td>ID disc.</td>
+                <td>ID plavce</td>
+                <td>Čas</td>
+                <td>Pořadí</td>
+                <td>Body</td>
+            </tr>
+            <tr>
+                <td>-----------------------</td>
+                <td>--------------</td>
+                <td>--------------------------------</td>
+                <td>-------------------</td>
+                <td>--------------</td>
+                <td>--------------</td>
+            </tr>
+                {foreach $data as $col}
+                    <tr>
+                            <td> {$col["id_event"]} </td>
+                            <td> {$col["id_stroke"]} </td>
+                            <td> {$col["id_swimmer"]} </td>
+                            <td> {$col["time"]} </td>
+                            <td> {$col["rank"]} </td>
+                            <td> {$col["point"]} </td>
+                    </tr>
+                {/foreach}  
+        {else}
+            <tr><td colspan="3">Zvolený soubor neobsahuje výsledky domácího plaveckého oddílu.</td></tr>
+        {/if} 
+    </table>
+
+{/block}

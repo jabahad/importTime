@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Presenters;
+
+use Nette, App\Model\SelectManager;
+
+
+/**
+ * Homepage presenter.
+ */
+class HomepagePresenter extends BasePresenter
+{
+  
+    private $selectManager;
+
+    private $par_where = array( 
+        array ( 
+            "sex",
+            "=",
+            "M")//,
+//        array (
+//            "surname",
+//            "like",
+//            "V%"),
+//        array (
+//            "year",
+//            "<",
+//            "2008")
+    );
+
+    private $par_order = array( 
+//        array ( 
+//            "sex",
+//            "DESC"),
+//        array (
+//            "year",
+//            "ASC"),
+        array (
+            "surname",
+            "ASC")
+    );
+    
+  
+    public function __construct(SelectManager $selectManager)
+    {
+        parent::__construct();
+        $this->selectManager = $selectManager;
+    }
+    
+
+    public function renderDefault()
+    {
+        $this->template->swimmers = $this->selectManager->getSelect($this->par_where, $this->par_order);        
+    }
+
+}
