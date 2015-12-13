@@ -6,6 +6,7 @@
             <file>file:/home/vencs88/public_html/import_time/app/presenters/HomepagePresenter.php</file>
             <file>file:/home/vencs88/public_html/import_time/app/model/ImportTimeManager.php</file>
             <file>file:/home/vencs88/public_html/import_time/app/presenters/templates/Homepage/default.latte</file>
+            <file>file:/home/vencs88/public_html/import_time/app/bootstrap.php</file>
         </group>
     </open-files>
 </project-private>

@@ -21,7 +21,7 @@ class ImportTimeManager extends Object
     // Pole pro ulozeni pozadovanych polozek
     private $data = array();
         
-    private $status = array("errnum" => 0, "recnum" => 0);
+    private $status = array("fileok" => TRUE, "errnum" => 0, "recnum" => 0);
 
     const NUM_FIELDS = 23;      // Spravny pocet polozek na radku
     const ODDIL = 'ASKBl';      // Zkratka domaciho plaveckeho oddilu
@@ -208,7 +208,7 @@ class ImportTimeManager extends Object
         
         // Dotaz na pohlavi plavce (M - muz, Z - zena)
         $data = $this->database->query('select sex from sm_swimmer where id = ?', $id);
-        $sex = $data->fetchField();
+        $sex = $data->fetchField(); 
 
         // Dotaz na delku bazenu (1 - 50m, 0 - 25m)
         $data = $this->database->query('select lcm from sm_event where id = ?', $this->id_event);
@@ -250,12 +250,16 @@ class ImportTimeManager extends Object
      * @param string $event_id Identifikator zavodu
      * @param string $delimiter Oddelovac poli
      * @param int $length Maximalni delka radku
-     * @return array Vysledky nactene ze vstupniho souboru
+     * @return array Informace o poctu chyb a nactenych zaznamu
      */
     public function getImportData($file_name, $id_event, $delimiter=";", $length=1000) 
     { 
         setlocale(LC_CTYPE, 'cs_CZ.UTF-8');
-        $this->fp = fopen($file_name, "r");
+        // V pripade chyby fopen vrati FALSE
+        if (!$this->fp = @fopen($file_name, "r")) {
+            $this->status["fileok"] = FALSE;
+            return $this->status;
+        }
         $this->id_event = $id_event;
         $this->delimiter = $delimiter; 
         $this->length = $length;        

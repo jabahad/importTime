@@ -4,7 +4,11 @@
 {*    {$swimmers}  *}
 
     <table>
-        {if count($status["recnum"]) > 0}
+        {if $status["fileok"] == FALSE}
+            <tr><td colspan="3">Chybně zadaný vstupní soubor!</td></tr>
+        {elseif $status["recnum"] == 0}
+            <tr><td colspan="3">Zvolený soubor neobsahuje výsledky domácího plaveckého oddílu!</td></tr>
+        {else}
             <tr>
                 <td>errnum</td>
                 <td>recnum</td>
@@ -45,8 +49,6 @@
                             <td> {$col["point"]} </td>
                     </tr>
                 {/foreach}  
-        {else}
-            <tr><td colspan="3">Zvolený soubor neobsahuje výsledky domácího plaveckého oddílu.</td></tr>
         {/if} 
     </table>
 

@@ -15,7 +15,11 @@ if (!function_exists($_b->blocks['content'][] = '_lbb5e7af87ec_content')) { func
 ;call_user_func(reset($_b->blocks['title']), $_b, get_defined_vars())  ?>
 
     <table>
-<?php if (count($status["recnum"]) > 0) { ?>
+<?php if ($status["fileok"] == FALSE) { ?>
+            <tr><td colspan="3">Chybně zadaný vstupní soubor!</td></tr>
+<?php } elseif ($status["recnum"] == 0) { ?>
+            <tr><td colspan="3">Zvolený soubor neobsahuje výsledky domácího plaveckého oddílu!</td></tr>
+<?php } else { ?>
             <tr>
                 <td>errnum</td>
                 <td>recnum</td>
@@ -55,9 +59,7 @@ if (!function_exists($_b->blocks['content'][] = '_lbb5e7af87ec_content')) { func
                             <td> <?php echo Latte\Runtime\Filters::escapeHtml($col["rank"], ENT_NOQUOTES) ?> </td>
                             <td> <?php echo Latte\Runtime\Filters::escapeHtml($col["point"], ENT_NOQUOTES) ?> </td>
                     </tr>
-<?php $iterations++; } } else { ?>
-            <tr><td colspan="3">Zvolený soubor neobsahuje výsledky domácího plaveckého oddílu.</td></tr>
-<?php } ?>
+<?php $iterations++; } } ?>
     </table>
 
 <?php
